@@ -1,0 +1,74 @@
+<div class="h-full overflow-auto bg-red-500">
+  <ion-content [fullscreen]="true" class="h-full">
+    <ion-header collapse="condense">
+      <ion-toolbar>
+        <ion-title size="large">Mi Perfil</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <div class="ion-padding bg-red-500">
+      <ion-avatar class="ion-margin-auto" style="width: 150px; height: 150px">
+        <img
+          alt="Foto de perfil"
+          src="https://ionicframework.com/docs/img/demos/avatar.svg"
+        />
+      </ion-avatar>
+
+      <ion-list>
+        <ion-item>
+          <ion-label>
+            <h2>Nombre</h2>
+            <p>Juan Pérez</p>
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <h2>Correo</h2>
+            <!-- <p>juan.perez@ejemplo.com</p> -->
+          </ion-label>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>
+            <h2>Teléfono</h2>
+            <p>+1 234 567 8900</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col size="6">
+            <img
+              src="https://picsum.photos/300/200"
+              alt="Imagen 1"
+              class="profile-image"
+            />
+          </ion-col>
+          <ion-col size="6">
+            <img
+              src="https://picsum.photos/300/201"
+              alt="Imagen 2"
+              class="profile-image"
+            />
+          </ion-col>
+          <ion-col size="6">
+            <img
+              src="https://picsum.photos/300/202"
+              alt="Imagen 3"
+              class="profile-image"
+            />
+          </ion-col>
+          <ion-col size="6">
+            <img
+              src="https://picsum.photos/300/203"
+              alt="Imagen 4"
+              class="profile-image"
+            />
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </ion-content>
+</div>

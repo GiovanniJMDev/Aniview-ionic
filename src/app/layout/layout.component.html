@@ -1,0 +1,53 @@
+<main class="flex flex-col h-dvh">
+  <header
+    class="w-full inset-2 bg-[#252525] text-white p-4 flex items-center justify-between"
+  >
+    <div>
+      <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24"><path fill="#ffffff" fill-rule="evenodd" d="M3 12a9 9 0 1 1 18 0a9 9 0 0 1-18 0m2.07 1a7.002 7.002 0 0 0 13.86 0h-4.1a3.001 3.001 0 0 1-5.66 0zm13.86-2a7.001 7.001 0 0 0-13.86 0h4.1a3.001 3.001 0 0 1 5.66 0zM12 13a1 1 0 1 0 0-2a1 1 0 0 0 0 2" clip-rule="evenodd"/></svg>
+    </div>
+    <h1 class="text-3xl font-bold">Aniview</h1>
+    <div>
+      <button (click)="showOptionsModal = true">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="2em"
+          height="2em"
+          viewBox="0 0 24 24"
+        >
+          <path fill="white" d="M21 6v2H3V6zM3 18h18v-2H3zm0-5h18v-2H3z" />
+        </svg>
+      </button>
+    </div>
+  </header>
+  <div class="flex-grow">
+    <router-outlet></router-outlet>
+  </div>
+
+  <!-- Modal de Opciones -->
+  <div *ngIf="showOptionsModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div class="bg-white p-6 rounded-lg w-[300px]">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-bold text-black">Opciones</h2>
+        <button (click)="showOptionsModal = false" class="text-gray-500 hover:text-gray-700">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M19 6.41L17.59 5L12 10.59L6.41 5L5 6.41L10.59 12L5 17.59L6.41 19L12 13.41L17.59 19L19 17.59L13.41 12L19 6.41z"/>
+          </svg>
+        </button>
+      </div>
+      <div class="space-y-2">
+        <button class="w-full py-2 px-4 bg-gray-100 text-gray-800 rounded-md hover:bg-gray-200">
+          Mi Perfil
+        </button>
+        <button class="w-full py-2 px-4 bg-gray-100 text-gray-800 rounded-md hover:bg-gray-200">
+          Configuración
+        </button>
+        <button class="w-full py-2 px-4 bg-gray-100 text-gray-800 rounded-md hover:bg-gray-200">
+          Ayuda
+        </button>
+        <button class="w-full py-2 px-4 bg-red-500 text-white rounded-md hover:bg-red-600">
+          Cerrar Sesión
+        </button>
+      </div>
+    </div>
+  </div>
+</main>
