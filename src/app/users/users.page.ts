@@ -17,10 +17,13 @@ interface User {
 })
 export class UsersPage implements OnInit {
   users: User[] = [];
+  userLists: any[] = [];
+  userName: string = '';
   error: string = '';
   showEditModal: boolean = false;
   showDeleteModal: boolean = false;
   showCreateModal: boolean = false;
+  showListModal: boolean = false; // Added for list modal
   editingUser: User = {
     id: '',
     username: '',
@@ -30,7 +33,7 @@ export class UsersPage implements OnInit {
     password: ''
   };
   deletingUser: User | null = null;
-  newUser: User = { // Added newUser property
+  newUser: User = {
     id: '',
     username: '',
     name: '',
@@ -57,7 +60,7 @@ export class UsersPage implements OnInit {
 
   openCreateModal() {
     console.log('Opening create modal');
-    this.newUser = { // Initialize newUser for creating a new user
+    this.newUser = {
       id: '',
       username: '',
       name: '',
@@ -71,7 +74,7 @@ export class UsersPage implements OnInit {
   closeCreateModal() {
     console.log('Closing create modal');
     this.showCreateModal = false;
-    this.newUser = { // Reset newUser when closing modal
+    this.newUser = {
       id: '',
       username: '',
       name: '',
@@ -151,5 +154,23 @@ export class UsersPage implements OnInit {
         this.error = 'Error al eliminar usuario';
       }
     }
+  }
+
+  async openListModal(user: User) {
+    console.log('Opening list modal for user:', user);
+    this.userName = `${user.name} ${user.lastname}`;
+    try {
+      const response = await axios.get(`http://localhost:8080/api/anime-lists/user/${user.id}`);
+      this.userLists = response.data;
+      this.showListModal = true;
+    } catch (error) {
+      console.error('Error fetching user lists:', error);
+      this.error = 'Error al obtener listas de usuario';
+    }
+  }
+
+  closeListModal() {
+    console.log('Closing list modal');
+    this.showListModal = false;
   }
 }

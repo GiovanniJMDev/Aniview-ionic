@@ -25,215 +25,86 @@
     <section
       class="p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 overflow-auto h-full w-[90%] bg-white"
     >
+      <ng-container *ngFor="let user of users">
+        <div class="flex flex-col items-center p-4 border rounded-lg">
+          <img
+            src="https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg"
+            [alt]="user.name"
+            class="rounded-lg w-full aspect-square max-w-60 max-h-60 object-cover"
+          />
+          <div class="text-center mt-2">
+            <h3 class="font-bold text-black">
+              {{ user.name }} {{ user.lastname }}
+            </h3>
+            <p class="text-black">Email: {{ user.email }}</p>
+            <p class="text-black">Id: {{ user.id }}</p>
 
-          <ng-container *ngFor="let user of users">
-            <div class="flex flex-col items-center p-4 border rounded-lg">
-              <img
-                src="https://t4.ftcdn.net/jpg/02/15/84/43/360_F_215844325_ttX9YiIIyeaR7Ne6EaLLjMAmy4GvPC69.jpg"
-                [alt]="user.name"
-                class="rounded-lg w-full aspect-square max-w-60 max-h-60 object-cover"
-              />
-              <div class="text-center mt-2">
-                <h3 class="font-bold text-black">
-                  {{ user.name }} {{ user.lastname }}
-                </h3>
-                <p class="text-black">Email: {{ user.email }}</p>
-              </div>
-              <div class="flex gap-4 mt-3">
-                <button
-                  (click)="openEditModal(user)"
-                  class="p-2 rounded-full hover:bg-green-100"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill="#22c55e"
-                      d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a.996.996 0 0 0 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83l3.75 3.75l1.83-1.83z"
-                    />
-                  </svg>
-                </button>
-                <button
-                  (click)="openDeleteModal(user)"
-                  class="p-2 rounded-full hover:bg-red-100"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      fill="#ef4444"
-                      d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
-                    />
-                  </svg>
-                </button>
-              </div>
-            </div>
-          </ng-container>
-
+          </div>
+          <div class="flex gap-4 mt-3">
+            <button
+              (click)="openEditModal(user)"
+              class="p-2 rounded-full hover:bg-green-100"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="#22c55e"
+                  d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a.996.996 0 0 0 0-1.41l-2.34-2.34a.996.996 0 0 0-1.41 0l-1.83 1.83l3.75 3.75l1.83-1.83z"
+                />
+              </svg>
+            </button>
+            <button
+              (click)="openDeleteModal(user)"
+              class="p-2 rounded-full hover:bg-red-100"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="#ef4444"
+                  d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+                />
+              </svg>
+            </button>
+          </div>
+          <div>
+            <button (click)="openListModal(user)" class="px-4 py-2 bg-purple-500 rounded-xl">Ver listas</button>
+          </div>
+        </div>
+      </ng-container>
     </section>
   </div>
 </div>
 
-<!-- Modal de Creación -->
+<!-- Modal de Listas -->
 <div
-  *ngIf="showCreateModal"
+  *ngIf="showListModal"
   class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
 >
   <div class="bg-white p-6 rounded-lg w-[600px] max-h-[80vh] overflow-auto">
-    <h2 class="text-2xl font-bold mb-4 text-black">Crear Usuario</h2>
-    <form (ngSubmit)="createUser()">
-      <div class="space-y-4">
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Usuario</label>
-          <input
-            [(ngModel)]="newUser.username"
-            name="username"
-            class="mt-1 block w-full rounded-md bg-white border-gray-300 shadow-sm text-black"
-          />
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Nombre</label>
-          <input
-            [(ngModel)]="newUser.name"
-            name="name"
-            class="mt-1 block w-full rounded-md bg-white border-gray-300 shadow-sm text-black"
-          />
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Apellido</label>
-          <input
-            [(ngModel)]="newUser.lastname"
-            name="lastname"
-            class="mt-1 block w-full rounded-md bg-white border-gray-300 shadow-sm text-black"
-          />
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Email</label>
-          <input
-            [(ngModel)]="newUser.email"
-            name="email"
-            type="email"
-            class="mt-1 block w-full rounded-md bg-white border-gray-300 shadow-sm text-black"
-          />
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Contraseña</label>
-          <input
-            [(ngModel)]="newUser.password"
-            name="password"
-            type="password"
-            class="mt-1 block w-full rounded-md bg-white border-gray-300 shadow-sm text-black"
-          />
-        </div>
-      </div>
-      <div class="mt-6 flex justify-end gap-4">
-        <button
-          type="button"
-          (click)="closeCreateModal()"
-          class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md"
-        >
-          Cancelar
-        </button>
-        <button
-          type="submit"
-          class="px-4 py-2 bg-green-500 text-white rounded-md"
-        >
-          Crear
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- Modal de Edición -->
-<div
-  *ngIf="showEditModal"
-  class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
->
-  <div class="bg-white p-6 rounded-lg w-[600px] max-h-[80vh] overflow-auto">
-    <h2 class="text-2xl font-bold mb-4 text-black">Editar Usuario</h2>
-    <form (ngSubmit)="updateUser()">
-      <div class="space-y-4">
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Nombre</label>
-          <input
-            [(ngModel)]="editingUser.name"
-            name="name"
-            class="mt-1 block w-full rounded-md bg-white border-gray-300 shadow-sm text-black"
-          />
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Apellido</label>
-          <input
-            [(ngModel)]="editingUser.lastname"
-            name="lastname"
-            class="mt-1 block w-full rounded-md bg-white border-gray-300 shadow-sm text-black"
-          />
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Email</label>
-          <input
-            [(ngModel)]="editingUser.email"
-            name="email"
-            type="email"
-            class="mt-1 block w-full rounded-md bg-white border-gray-300 shadow-sm text-black"
-          />
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-700">Contraseña</label>
-          <input
-            [(ngModel)]="editingUser.password"
-            name="password"
-            type="password"
-            class="mt-1 block w-full rounded-md bg-white border-gray-300 shadow-sm text-black"
-          />
-        </div>
-      </div>
-      <div class="mt-6 flex justify-end gap-4">
-        <button
-          type="button"
-          (click)="closeEditModal()"
-          class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md"
-        >
-          Cancelar
-        </button>
-        <button
-          type="submit"
-          class="px-4 py-2 bg-green-500 text-white rounded-md"
-        >
-          Guardar
-        </button>
-      </div>
-    </form>
-  </div>
-</div>
-
-<!-- Modal de Eliminación -->
-<div
-  *ngIf="showDeleteModal"
-  class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"
->
-  <div class="bg-white p-6 rounded-lg">
-    <h2 class="text-2xl font-bold mb-4 text-black">Confirmar Eliminación</h2>
-    <p class="text-black">¿Estás seguro de que deseas eliminar "{{ deletingUser?.name }} {{ deletingUser?.lastname }}"?</p>
-    <div class="mt-6 flex justify-end gap-4">
+    <h2 class="text-2xl font-bold mb-4 text-black">Listas de {{ userName }}</h2>
+    <ul class="space-y-2">
+      <li *ngFor="let list of userLists" class="text-black">
+        List ID: {{ list.id }} - List Type: {{ list.listType }} - Created At: {{ list.createdAt | date }}
+      </li>
+      <li *ngIf="userLists.length === 0" class="text-black">
+        No hay listas disponibles para este usuario.
+      </li>
+    </ul>
+    <div class="mt-6 flex justify-end">
       <button
-        (click)="closeDeleteModal()"
+        type="button"
+        (click)="closeListModal()"
         class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md"
       >
-        Cancelar
-      </button>
-      <button
-        (click)="deleteUser()"
-        class="px-4 py-2 bg-red-500 text-white rounded-md"
-      >
-        Eliminar
+        Cerrar
       </button>
     </div>
   </div>
