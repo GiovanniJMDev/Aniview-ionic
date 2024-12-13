@@ -27,10 +27,20 @@ const routes: Routes = [
         loadChildren: () =>
           import('./profile/profile.module').then((m) => m.ProfilePageModule),
       },
-            {
+      {
         path: 'chat',
         loadChildren: () =>
           import('./chat/chat.module').then((m) => m.ChatPageModule),
+      },
+      {
+        path: 'users',
+        loadChildren: () =>
+          import('./users/users.module').then((m) => m.UsersPageModule),
+      },
+      {
+        path: 'lists',
+        loadChildren: () =>
+          import('./lists/lists.module').then((m) => m.ListsPageModule),
       },
       // Agrega más rutas aquí según sea necesario
     ],
@@ -42,7 +52,8 @@ const routes: Routes = [
   },
   {
     path: 'chat',
-    loadChildren: () => import('./chat/chat.module').then( m => m.ChatPageModule)
+    loadChildren: () =>
+      import('./chat/chat.module').then((m) => m.ChatPageModule),
   },
 ];
 
